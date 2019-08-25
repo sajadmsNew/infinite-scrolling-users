@@ -6,6 +6,7 @@ import {
   List,
   InfiniteLoader
 } from "react-virtualized";
+import _ from "lodash";
 import "react-virtualized/styles.css";
 
 function InfiniteTable({
@@ -14,9 +15,13 @@ function InfiniteTable({
   /** Callback function responsible for loading the next page of items */
   loadNextPage
 }) {
-  // Keep track of pageNumber in our state (using the State Hook)
+  // Keep track of pageNumber, sortBy and sortDirection in our state (using the State Hook)
+  // TODO: re-evaluate this, may be cleaner to convert to Class and use setState() depending on state updates
   const [pageNumber, setPageNumber] = useState(1);
+  const [sortBy, setSortBy] = useState('dataKey');
+  const [sortDirection, setSortDirection] = useState('ASC');
 
+  // Executes callback method responsible for requesting more user data
   const loadMoreRows = () => {
     let newPageNumber = pageNumber + 1;
     loadNextPage(newPageNumber);
@@ -41,6 +46,32 @@ function InfiniteTable({
     );
   };
 
+  /**
+   * 
+   */
+  const sortColumn = ({ sortBy, sortDirection }) => {
+    setSortBy(sortBy)
+    setSortDirection(sortDirection)
+
+    list.sort(function(a, b) {
+      // Using lodash's get() to allow using sortBy which can be a nested object property string like ('name.last') or ('location.city')
+      var strA = _.get(a, sortBy); 
+      var strB = _.get(b, sortBy);
+
+      // Compare strings and take into account the sortDirection
+      if (strA < strB) {
+        return sortDirection === "ASC" ? 1 : -1;
+      }
+      if (strA > strB) {
+        return sortDirection === "ASC" ? -1 : 1;
+      }
+    
+      // strings must be equal
+      return 0;
+    })
+  }
+
+
   return (
     <div>
       <h3>Page count: {pageNumber}</h3>
@@ -63,36 +94,41 @@ function InfiniteTable({
                 rowHeight={40}
                 rowCount={list.length}
                 rowGetter={({ index }) => list[index]}
+                sort={sortColumn}
+                sortBy={sortBy}
+                sortDirection={sortDirection}
               >
                 <Column
                   label=""
                   dataKey="picture"
                   width={100}
+                  disableSort
                   cellRenderer={getImageColumn}
                 />
                 <Column
                   label="First Name"
-                  dataKey="first"
+                  dataKey="name.first"
                   width={150}
+                  defaultSortDirection="ASC"
                   cellDataGetter={({ dataKey, rowData }) =>
-                    rowData.name[dataKey]
+                    rowData.name.first
                   }
                 />
                 <Column
                   label="Last Name"
-                  dataKey="last"
+                  dataKey="name.last"
                   width={150}
                   cellDataGetter={({ dataKey, rowData }) =>
-                    rowData.name[dataKey]
+                    rowData.name.last
                   }
                 />
                 <Column label="E.mail" dataKey="email" width={300} />
                 <Column
                   label="City"
-                  dataKey="city"
+                  dataKey="location.city"
                   width={150}
                   cellDataGetter={({ dataKey, rowData }) =>
-                    rowData.location[dataKey]
+                    rowData.location.city
                   }
                 />
               </Table>
