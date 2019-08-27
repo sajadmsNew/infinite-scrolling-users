@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import InfiniteTable from "./InfiniteTable";
 import Navbar from "./Navbar";
+import Modal from "./Modal";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       list: [],
-      fetching: false
+      fetching: false,
+      show: false,
+      focusedUserData: {},
+      modalContent: null,
+      modalTitle: null
     };
   }
 
@@ -46,21 +51,72 @@ class App extends Component {
           }))
         )
         .then(() => {
+
+          console.log(this.state.list);
           resolve();
         });
     });
   };
 
+  showModal = (userData) => {
+    const modalContent = (
+      <div className="row">
+        <div className="column modalContentDetails px-4">
+          <div className="modalContentDetailsItem">
+            <span className="label">Email <a href={`mailto:${userData.email}`}>&#10697;</a></span>
+            
+            <span>{userData.email}</span>
+          </div>
+          <div className="modalContentDetailsItem">
+            <span className="label">Phone</span>
+            <span>{userData.phone}</span>
+          </div>
+          <div className="modalContentDetailsItem">
+            <span className="label">Age</span>
+            <span>{userData.dob.age}</span>
+          </div>
+        </div>
+        <div className="column modalContentDetails px-4">
+          <div className="modalContentDetailsItem">
+            <span className="label">Address <a href={`http://www.google.com/maps/place/${userData.location.coordinates.latitude},${userData.location.coordinates.longitude}`} target="_blank">&#10697;</a></span>
+            <span>{userData.location.street},</span>
+            <span>{userData.location.city},</span>
+            <span>{userData.location.state}</span>
+          </div>
+          <div className="modalContentDetailsItem">
+            <span className="label">User for</span>
+            <span>{userData.registered.age} years</span>
+          </div>
+        </div>
+      </div>
+    )
+
+    // Quick (and slightly dirty way) to uppercase first and last name before setting modal title
+    const uppercaseFirst = userData.name.first.charAt(0).toUpperCase() + userData.name.first.slice(1);
+    const uppercaseSecond = userData.name.last.charAt(0).toUpperCase() + userData.name.last.slice(1);
+    const modalTitle = uppercaseFirst + ' ' + uppercaseSecond;
+    this.setState({ show: true, focusedUserData: userData, modalContent: modalContent, modalTitle: modalTitle });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false, focusedUserData: {}, modalContent: null });
+  };
+  
+
   render() {
     return (
       <div>
-        <Navbar/>
-        <div class="tableContainer">
+        <Navbar />
+        <Modal show={this.state.show} handleClose={this.hideModal} profileTitle={this.state.modalTitle} profileImage={this.state.focusedUserData}>
+          {this.state.modalContent}
+        </Modal>
+        <div className="tableContainer">
           <InfiniteTable
             hasNextPage={true}
             isNextPageLoading={false}
             list={this.state.list}
             loadNextPage={this.loadNextPage}
+            onRowClickCallback={this.showModal}
           />
         </div>
       </div>
