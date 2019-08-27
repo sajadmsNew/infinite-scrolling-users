@@ -1,0 +1,35 @@
+$border: 1px solid #D3D3D3;
+
+.tableContainer {
+    width: 80%;
+    margin: auto
+}
+
+.bordered {
+    .ReactVirtualized__Table__headerRow, .ReactVirtualized__Table__row {
+        border-top: $border;
+    }
+
+    .ReactVirtualized__Table__headerRow {
+        border-bottom: $border;
+    }
+}
+
+.striped {
+    .ReactVirtualized__Table__row:nth-child(2n+1) {
+        background-color: #fafafa;
+    }
+}
+
+.ReactVirtualized__Table__headerRow {
+    background-color: white;
+}
+
+.ReactVirtualized__Table__row:hover {
+    cursor: pointer;
+}
+
+
+.ReactVirtualized__Table__Grid:focus, .ReactVirtualized__Table__row:focus {
+    outline: none;
+}
