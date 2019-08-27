@@ -1,6 +1,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0a6daaaa-56a2-4420-ad81-85817ea5c60c/deploy-status)](https://app.netlify.com/sites/cocky-dubinsky-62772c/deploys)
 
-- Deployed link: https://cocky-dubinsky-62772c.netlify.com/
+- Deployed link: https://infinite-scrolling-users.netlify.com/
 
 ## Project Aim
 Use `create-react-app` and the library `react-virtualized` to make an infinite-scrolling table displaying a big list of users.
