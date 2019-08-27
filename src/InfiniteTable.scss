@@ -33,3 +33,7 @@ $border: 1px solid #D3D3D3;
 .ReactVirtualized__Table__Grid:focus, .ReactVirtualized__Table__row:focus {
     outline: none;
 }
+
+.uppercaseFirstLetter::first-letter {
+    text-transform: uppercase;
+}

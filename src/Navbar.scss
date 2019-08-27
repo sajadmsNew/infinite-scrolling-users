@@ -6,9 +6,29 @@ $rasaPurple: #5a1eee;
   margin-right: 1rem;
 }
 
-.githubLogo {
-  width: 40px;
+.headerLink {
+  padding: 0;
 }
+
+.headerLink:hover {
+  background-color: $rasaPurple;
+}
+
+.githubLogo {
+  width: 35px;
+  padding-top: 6.5px; // navbar height is 48px: (48-35)/2
+  margin-right: 1rem;
+  opacity: .5;
+  -webkit-transition: opacity .2s ease-in-out;
+    -moz-transition: opacity .2s ease-in-out;
+    -ms-transition: opacity .2s ease-in-out;
+    -o-transition: opacity .2s ease-in-out;
+    transition: opacity .2s ease-in-out;
+}
+
+.githubLogo:hover {
+  opacity: 1;
+} 
 
 .headerText {
   font-weight: bold;

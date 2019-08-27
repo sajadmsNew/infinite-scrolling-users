@@ -16,7 +16,9 @@ function Navbar() {
           <span>Infinite Scrolling Users</span>
         </li>
         <li className="headerRight">
-          <img className="githubLogo" src={githubLogoPath}/>
+          <a href="https://github.com/mjaycub/infinite-scrolling-users" target="_blank" className="headerLink">
+            <img className="githubLogo" src={githubLogoPath}/>
+          </a>
         </li>
       </ul>
     </div>

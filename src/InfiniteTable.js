@@ -125,6 +125,7 @@ function InfiniteTable({
                   <Column
                     label="First Name"
                     dataKey="name.first"
+                    className="uppercaseFirstLetter"
                     width={150}
                     defaultSortDirection="ASC"
                     cellDataGetter={({ dataKey, rowData }) =>
@@ -134,6 +135,7 @@ function InfiniteTable({
                   <Column
                     label="Last Name"
                     dataKey="name.last"
+                    className="uppercaseFirstLetter"
                     width={150}
                     cellDataGetter={({ dataKey, rowData }) => rowData.name.last}
                   />
@@ -141,6 +143,7 @@ function InfiniteTable({
                   <Column
                     label="City"
                     dataKey="location.city"
+                    className="uppercaseFirstLetter"
                     width={150}
                     cellDataGetter={({ dataKey, rowData }) =>
                       rowData.location.city
