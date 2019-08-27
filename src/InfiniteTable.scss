@@ -1,39 +1,71 @@
-$border: 1px solid #D3D3D3;
+$border: 1px solid #d3d3d3;
 
 .tableContainer {
-    width: 80%;
-    margin: auto
+  width: 80%;
+  margin: auto;
 }
 
 .bordered {
-    .ReactVirtualized__Table__headerRow, .ReactVirtualized__Table__row {
-        border-top: $border;
-    }
+  .ReactVirtualized__Table__headerRow,
+  .ReactVirtualized__Table__row {
+    border-top: $border;
+  }
 
-    .ReactVirtualized__Table__headerRow {
-        border-bottom: $border;
-    }
+  .ReactVirtualized__Table__headerRow {
+    border-bottom: $border;
+  }
 }
 
 .striped {
-    .ReactVirtualized__Table__row:nth-child(2n+1) {
-        background-color: #fafafa;
-    }
+  .ReactVirtualized__Table__row:nth-child(2n + 1) {
+    background-color: #fafafa;
+  }
 }
 
 .ReactVirtualized__Table__headerRow {
-    background-color: white;
+  background-color: white;
 }
 
 .ReactVirtualized__Table__row:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
+.ReactVirtualized__Table__Grid:focus,
+.ReactVirtualized__Table__row:focus {
+  outline: none;
+}
 
-.ReactVirtualized__Table__Grid:focus, .ReactVirtualized__Table__row:focus {
-    outline: none;
+.ReactVirtualized__Table__rowColumn img {
+    border-radius: 50%;
+    height: 35px;
 }
 
 .uppercaseFirstLetter::first-letter {
-    text-transform: uppercase;
+  text-transform: uppercase;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  margin: auto;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.tableLoadingMessage {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 14px;
+  color: grey;
 }

@@ -14,7 +14,8 @@ function InfiniteTable({
   /** List of items loaded so far */
   list,
   /** Callback function responsible for loading the next page of items */
-  loadNextPage
+  loadNextPage,
+  onRowClickCallback
 }) {
   // Keep track of pageNumber, sortBy and sortDirection in our state (using the State Hook)
   // TODO: re-evaluate this, may be cleaner to convert to Class and use setState() depending on state updates
@@ -32,7 +33,8 @@ function InfiniteTable({
   // Returns status message when no rows are rendered
   const onNoRowsRendered = () => {
     return (
-      <div>
+      <div className="tableLoadingMessage">
+        <div class="loader"></div>
         <span>Loading...</span>
       </div>
     );
@@ -40,8 +42,7 @@ function InfiniteTable({
 
   // Handler for click event on table row
   const onRowClick = ({ event, index, rowData }) => {
-    console.log(`ON ROW CLICK ` + index);
-    console.log(rowData);
+    onRowClickCallback(rowData)
   };
 
   // Takes the image source data from column data and returns an image element
@@ -118,7 +119,7 @@ function InfiniteTable({
                   <Column
                     label=""
                     dataKey="picture"
-                    width={100}
+                    width={50}
                     disableSort
                     cellRenderer={getImageColumn}
                   />
