@@ -9,3 +9,6 @@ The website [randomuser.me](randomuser.me) will generate you the list that you c
 
 ## Running Locally
 Clone this repository and run `npm install` to install any dependencies. `npm start`runs the app in the development mode. `npm run build` will build the app for production into the /build folder.
+
+## Running Tests
+The tests are created using `cypress`, a dev dependency that will be installed when you run `npm install` after cloning the project. Run `npm test` to run the test suite in your browser.
