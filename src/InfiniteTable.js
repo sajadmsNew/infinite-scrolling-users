@@ -55,7 +55,7 @@ function InfiniteTable({
   };
 
   /**
-   *
+   *  Sorts the list of users with parmeters `sortBy` and `sortDirection`, based on column header click
    */
   const sortColumn = ({ sortBy, sortDirection }) => {
     setSortBy(sortBy);

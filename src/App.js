@@ -58,6 +58,9 @@ class App extends Component {
     });
   };
 
+  /**
+   * Show modal (pop-up) populated with provided user data
+   */
   showModal = (userData) => {
     const modalContent = (
       <div className="row">
