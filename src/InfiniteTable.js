@@ -100,6 +100,7 @@ function InfiniteTable({
             <AutoSizer>
               {({ height, width }) => (
                 <Table
+                  id="infinite-table"
                   className="usersTable bordered striped"
                   noRowsRenderer={onNoRowsRendered}
                   ref={registerChild}

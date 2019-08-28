@@ -7,7 +7,7 @@ function Navbar() {
   const githubLogoPath = `${process.env.PUBLIC_URL}/github.png`;
 
   return (
-    <div>
+    <div id="header-navbar">
       <ul>
         <li>
           <img className="headerLogo" src={logoPath}/>
